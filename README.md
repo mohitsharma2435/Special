@@ -60,83 +60,30 @@ git push -u origin main
 
 #### 🌟 Option A: Deploy via GitHub Pages (Built directly in GitHub)
 
-GitHub Pages can automatically build and host your Vite React app using GitHub Actions:
+GitHub Pages automatically builds and hosts your Vite React app using GitHub Actions.
 
-1. **Set Vite Base Path for GitHub Pages**:
-   If your GitHub repository is at `https://github.com/YOUR_USERNAME/shreya-birthday`, GitHub Pages will host it at `https://YOUR_USERNAME.github.io/shreya-birthday/`.
-   In `vite.config.ts`, ensure the base path is set to relative `./` so that all images and audio load properly on the sub-path:
-   ```typescript
-   export default defineConfig(() => {
-     return {
-       base: './', // <-- Ensures assets load on GitHub Pages subpaths
-       plugins: [react(), tailwindcss()],
-       // ...
-     };
-   });
-   ```
+✅ **Already Done For You in This Project**:
+- `base: './'` is already configured in `vite.config.ts`.
+- Relative asset URL handling for photos and audio is configured.
+- `package-lock.json` has been generated for clean CI/CD builds.
+- The GitHub Actions workflow file is already in place at `.github/workflows/deploy.yml`.
 
-2. **Add a GitHub Actions Workflow**:
-   Inside your project, create the folder and file `.github/workflows/deploy.yml` with the following content:
-   ```yaml
-   name: Deploy to GitHub Pages
+All you need to do after pushing your repository is:
 
-   on:
-     push:
-       branches: ['main']
-
-   permissions:
-     contents: read
-     pages: write
-     id-token: write
-
-   concurrency:
-     group: 'pages'
-     cancel-in-progress: true
-
-   jobs:
-     deploy:
-       environment:
-         name: github-pages
-         url: ${{ steps.deployment.outputs.page_url }}
-       runs-on: ubuntu-latest
-       steps:
-         - name: Checkout repository
-           uses: actions/checkout@v4
-
-         - name: Setup Node.js
-           uses: actions/setup-node@v4
-           with:
-             node-version: 20
-             cache: 'npm'
-
-         - name: Install dependencies
-           run: npm ci
-
-         - name: Build project
-           run: npm run build
-
-         - name: Setup Pages
-           uses: actions/configure-pages@v4
-
-         - name: Upload artifact
-           uses: actions/upload-pages-artifact@v3
-           with:
-             path: './dist'
-
-         - name: Deploy to GitHub Pages
-           id: deployment
-           uses: actions/deploy-pages@v4
-   ```
-
-3. **Enable GitHub Actions in GitHub Settings**:
-   - Go to your repository on GitHub.
-   - Click **Settings** (tab at the top).
+1. **Enable GitHub Pages in Your Repository**:
+   - Go to your repository on GitHub (`https://github.com/YOUR_USERNAME/YOUR_REPOSITORY_NAME`).
+   - Click the **Settings** tab at the top.
    - In the left sidebar, click **Pages**.
-   - Under **Build and deployment** -> **Source**, select **GitHub Actions**.
-   - Save changes.
+   - Under **Build and deployment** -> **Source**, select **GitHub Actions** (from the dropdown).
+   - Click Save.
 
-4. **Your Live Website**:
-   GitHub will trigger the build automatically. Within 1-2 minutes, your website will be live at:
+2. **Watch the Automatic Deployment**:
+   - Click the **Actions** tab at the top of your GitHub repository.
+   - You will see the **Deploy to GitHub Pages** workflow running.
+   - In ~1-2 minutes, it will show a green checkmark!
+
+3. **Your Live Website**:
+   GitHub will provide your live URL right in **Settings** -> **Pages**:
    ```
    https://YOUR_USERNAME.github.io/YOUR_REPOSITORY_NAME/
    ```

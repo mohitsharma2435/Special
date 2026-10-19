@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useRef, useCallback, useEffect } from 'react';
 import { birthdayConfig, memories as initialMemories } from '../data/config';
 import { Memory } from '../types';
+import { getAssetUrl } from '../utils/assets';
 
 interface MediaContextType {
   memories: Memory[];
@@ -161,16 +162,16 @@ export const MediaProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       <audio
         ref={audioRef}
         id="birthday-background-music"
-        src={birthdayConfig.musicUrl || '/music.mp3'}
+        src={birthdayConfig.musicUrl || getAssetUrl('/music.mp3')}
         preload="auto"
         loop
         playsInline
       >
-        <source src={birthdayConfig.musicUrl || '/music.mp3'} type="audio/mpeg" />
-        <source src="/music.mp3" type="audio/mpeg" />
-        <source src="/music.m4a" type="audio/mp4" />
+        <source src={birthdayConfig.musicUrl || getAssetUrl('/music.mp3')} type="audio/mpeg" />
+        <source src={getAssetUrl('/music.mp3')} type="audio/mpeg" />
+        <source src={getAssetUrl('/music.m4a')} type="audio/mp4" />
         <source
-          src="/assets/aistudio/Endhayya_Saami_Audio_Song___Ranabaali___Vijay_Deverakonda_Rashmika___Ajay-Atul___Rahul_Sankrityan_fb6d6c4c.m4a"
+          src={getAssetUrl('/assets/aistudio/Endhayya_Saami_Audio_Song___Ranabaali___Vijay_Deverakonda_Rashmika___Ajay-Atul___Rahul_Sankrityan_fb6d6c4c.m4a')}
           type="audio/mp4"
         />
       </audio>

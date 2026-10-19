@@ -1,4 +1,5 @@
 import { BirthdayConfig, Memory, ScrapbookPageData } from '../types';
+import { getAssetUrl } from '../utils/assets';
 
 export const birthdayConfig: BirthdayConfig = {
   name: "Shreya",
@@ -7,12 +8,12 @@ export const birthdayConfig: BirthdayConfig = {
   dateLabel: "14 SEPT",
   subtitle: "May this 14th of september bring you endless reasons to smile, dream and conquer",
   footerText: "CELEBRATING SHREYA",
-  musicUrl: "/music.mp3",
+  musicUrl: getAssetUrl("/music.mp3"),
   musicTitle: "Endhayya Saami • Shreya's Birthday Melody",
   accentColor: "#ff9000",
 };
 
-export const memories: Memory[] = [
+const rawMemories: Memory[] = [
   {
     id: "mem-1",
     filename: "IMG_20260819_211444_142.jpg",
@@ -223,7 +224,12 @@ export const memories: Memory[] = [
   },
 ];
 
-export const scrapbookSpread: ScrapbookPageData[] = [
+export const memories: Memory[] = rawMemories.map((m) => ({
+  ...m,
+  image: getAssetUrl(m.image),
+}));
+
+const rawScrapbookSpread: ScrapbookPageData[] = [
   {
     id: 1,
     title: "Chapter 21: Happy Birthday Shreya",
@@ -358,3 +364,12 @@ export const scrapbookSpread: ScrapbookPageData[] = [
     ],
   },
 ];
+
+export const scrapbookSpread: ScrapbookPageData[] = rawScrapbookSpread.map((page) => ({
+  ...page,
+  photos: page.photos.map((photo) => ({
+    ...photo,
+    url: getAssetUrl(photo.url),
+  })),
+}));
+
