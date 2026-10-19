@@ -1,0 +1,6 @@
+{
+  "name": "Birthday Memory Experience",
+  "description": "A cinematic, interactive 14 Sept birthday celebration and memory gallery experience for Shreya with editorial film strips, Polaroid wall, physical scrapbook, music player, and floating memory universe.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
